@@ -180,7 +180,7 @@ class MLBacktraderBase():
         plt.tight_layout()
 
         if image_to_file:
-            plt.savefig(filename, dpi=300)       
+            plt.savefig(filename, dpi=100)       
 
 
     def get_data(self):
@@ -191,12 +191,26 @@ class MLBacktraderBase():
         return self.data
 
     def save_models(self,):
+        """
+        모델 저장
+        """
+
         for model in self.models:
             joblib.dump(self.models[model], f"{model}.pkl")
             print(f"{model} 저장을 완료하였습니다.")
 
     def load_model(self, model):
+        """
+        모델 로딩
+        """
+
         return joblib.load(f"{model}.pkl") 
+
+    def create_predict_data(self, data, model):
+        """
+        모델 예측값 생성
+        """
+        data["pos"] = model.predict(data[self.cols_bin])        
 
 if __name__ == "__main__":   
     m = MLBacktraderBase("AAPL", datetime.datetime(2020,1,1), datetime.datetime(2022,1,1))
