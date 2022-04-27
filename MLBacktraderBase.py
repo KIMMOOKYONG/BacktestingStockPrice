@@ -94,7 +94,7 @@ class MLBacktraderBase():
         plt.tight_layout()
 
         if image_to_file:
-            plt.savefig(filename, dpi=300)
+            plt.savefig(filename, dpi=100)
 
     def create_lags_data(self, lags=[1,2,3,4,5]):
         """
